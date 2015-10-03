@@ -115,7 +115,7 @@ def find_unique_common_items(list1, list2):
 
     return unique_common_list
 
-# list1= [1, 2, 3, 4]
+# list1 = [1, 2, 3, 4]
 # list2 = [1, 1, 2, 2]
 
 # print find_unique_common_items(list2, list1)
@@ -148,8 +148,30 @@ def get_sum_zero_pairs(input_list):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
+    # Create an empty set to add pairs to.
+    sum_zero_set = set()
 
-    return []
+    # Sort the input list so equivalent pairs look the same when we
+    # add them to our set.
+    input_list.sort()
+
+    # Loop iterate over the sorted input list, adding each number one
+    # at a time to numbers following it. If the sum of the pair is zero,
+    # we put the pair in a tuple and add the tuple to our set.
+    for index1 in range(len(input_list) - 1):
+        for index2 in range(index1 + 1, len(input_list)):
+            if (input_list[index1] + input_list[index2] == 0):
+                pair = (input_list[index1], input_list[index2])
+                sum_zero_set.add(pair)
+
+    # Since we want to return a list of lists, we convert the tuples
+    # we created in the loop to lists
+
+    unique_pairs = []
+    for pair in sum_zero_set:
+        unique_pairs.append(list(pair))
+
+    return unique_pairs
 
 
 # def remove_duplicates(words):
