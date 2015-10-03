@@ -1,5 +1,5 @@
 # To work on the advanced problems, set to True
-ADVANCED = False
+ADVANCED = True
 
 
 def count_unique(input_string):
@@ -370,53 +370,92 @@ def adv_get_top_letter(input_string):
     Spaces do not count as letters.
 
     """
+    # Convert the input string into one long string with no spaces.
+    words = input_string.split()
+    long_ass_string = "".join(words)
+
+    # Create a dictionary to keep track of how many times a character
+    # appears in the string.
+    words_app = {}
+
+    for char in long_ass_string:
+        words_app[char] = words_app.get(char, 0) + 1
+
+    unique_chars = words_app.keys()
+    num_words = {}
+
+    for char in unique_chars:
+        key = words_app[char]
+        if key not in num_words:
+            num_words[key] = [char]
+        else:
+            num_words[key].append(char)
+
+    print num_words
+
+
+
+    # # Create the list we'll ultimately return.
+    # final_list = []
+
+    # # To add to the final_list in ascending order, create a list of
+    # # sorted keys. We then create and add tuple-ized dictionary entries
+    # # in order of this list.
+    # word_keys = words_by_length.keys()
+
+    # for word in word_keys:
+    #     pair = (word, words_by_length[word])
+    #     final_list.append(pair)
+
 
     return ''
 
-
-def adv_alpha_sort_by_word_length(words):
-    """Given a list of words, return a list of tuples, ordered by word-length.
-
-    Each tuple should have two items--a number that is a word-length,
-    and the list of words of that word length. In addition to ordering
-    the list by word length, order each sub-list of words alphabetically.
-    Now try doing it with only one call to .sort() or sorted(). What does the
-    optional "key" argument for .sort() and sorted() do?
-
-    For example:
-
-        >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
-        [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
-
-    """
-
-    return []
+adv_get_top_letter("The rain in spain stays mainly in the plain.")
 
 
-##############################################################################
-# You can ignore everything below this.
+# def adv_alpha_sort_by_word_length(words):
+#     """Given a list of words, return a list of tuples, ordered by word-length.
 
-def print_dict(d):
-    # This method is just used to print dictionaries in key-alphabetical
-    # order, and is only used for our documentation tests. You can ignore it.
-    if isinstance(d, dict):
-        print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
-    else:
-        print d
+#     Each tuple should have two items--a number that is a word-length,
+#     and the list of words of that word length. In addition to ordering
+#     the list by word length, order each sub-list of words alphabetically.
+#     Now try doing it with only one call to .sort() or sorted(). What does the
+#     optional "key" argument for .sort() and sorted() do?
+
+#     For example:
+
+#         >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
+#         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
+
+#     """
+
+#     return []
 
 
-def sort_pairs(l):
-    # Print sorted list of pairs where the pairs are sorted. This is used only
-    # for documentation tests. You can ignore it.
-    return sorted(sorted(pair) for pair in l)
+# ##############################################################################
+# # You can ignore everything below this.
 
-if __name__ == "__main__":
-    print
-    import doctest
-    for k, v in globals().items():
-        if k[0].isalpha():
-            if k.startswith('adv_') and not ADVANCED:
-                continue
-            a = doctest.run_docstring_examples(v, globals(), name=k)
-    print "** END OF TEST OUTPUT"
-    print
+# def print_dict(d):
+#     # This method is just used to print dictionaries in key-alphabetical
+#     # order, and is only used for our documentation tests. You can ignore it.
+#     if isinstance(d, dict):
+#         print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
+#     else:
+#         print d
+
+
+# def sort_pairs(l):
+#     # Print sorted list of pairs where the pairs are sorted. This is used only
+#     # for documentation tests. You can ignore it.
+#     return sorted(sorted(pair) for pair in l)
+
+# if __name__ == "__main__":
+#     print
+#     import doctest
+#     for k, v in globals().items():
+#         if k[0].isalpha():
+#             if k.startswith('adv_') and not ADVANCED:
+#                 continue
+#             a = doctest.run_docstring_examples(v, globals(), name=k)
+#     print "** END OF TEST OUTPUT"
+#     print
