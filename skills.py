@@ -44,95 +44,112 @@ def count_unique(input_string):
 
     return unique
 
-string = "Hello there, how are you? Hello hello, you you you you"
-print count_unique(string)
+# string = "Hello there, how are you? Hello hello, you you you you"
+# print count_unique(string)
 
 
-# def find_common_items(list1, list2):
-#     """Produce the set of common items in two lists.
+def find_common_items(list1, list2):
+    """Produce the set of common items in two lists.
 
-#     Given two lists, return a list of the common items shared between
-#     the lists.
+    Given two lists, return a list of the common items shared between
+    the lists.
 
-#     IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
-
-
-#     For example:
-
-#         >>> sorted(find_common_items([1, 2, 3, 4], [1, 2]))
-#         [1, 2]
-
-#     If an item appears more than once in at least one list and is present
-#     in both lists, return it each time:
-
-#         >>> sorted(find_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
-#         [1, 1, 2, 2]
-
-#     (And the order of which has the multiples shouldn't matter, either):
-
-#         >>> sorted(find_common_items([1, 1, 2, 2], [1, 2, 3, 4]))
-#         [1, 1, 2, 2]
-
-#     """
-
-#     return []
+    IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
 
 
-# def find_unique_common_items(list1, list2):
-#     """Produce the set of *unique* common items in two lists.
+    For example:
 
-#     Given two lists, return a list of the *unique* common items shared between
-#     the lists.
+        >>> sorted(find_common_items([1, 2, 3, 4], [1, 2]))
+        [1, 2]
 
-#     IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
+    If an item appears more than once in at least one list and is present
+    in both lists, return it each time:
 
+        >>> sorted(find_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
+        [1, 1, 2, 2]
 
-#     Just like `find_common_items`, this should find [1, 2]:
+    (And the order of which has the multiples shouldn't matter, either):
 
-#         >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 2]))
-#         [1, 2]
+        >>> sorted(find_common_items([1, 1, 2, 2], [1, 2, 3, 4]))
+        [1, 1, 2, 2]
 
-#     However, now we only want unique items, so for these lists, don't show
-#     more than 1 or 2 once:
+    """
+    common = []
 
-#         >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
-#         [1, 2]
+    for item1 in list1:
+        for item2 in list2:
+            if item2 == item1:
+                common.append(item2)
 
-#     """
-
-#     return []
-
-
-# def get_sum_zero_pairs(input_list):
-#     """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
-
-#     Given a list of numbers, add up each individual pair of numbers.
-#     Return a list of each pair of numbers that adds up to 0.
+    return common
 
 
-#     For example:
+def find_unique_common_items(list1, list2):
+    """Produce the set of *unique* common items in two lists.
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1]) )
-#         [[-2, 2], [-1, 1]]
+    Given two lists, return a list of the *unique* common items shared between
+    the lists.
 
-#         >>> sort_pairs( get_sum_zero_pairs([3, -3, 2, 1, -2, -1]) )
-#         [[-3, 3], [-2, 2], [-1, 1]]
+    IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
 
-#     This should always be a unique list, even if there are
-#     duplicates in the input list:
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1]) )
-#         [[-2, 2], [-1, 1]]
+    Just like `find_common_items`, this should find [1, 2]:
 
-#     Of course, if there are one or more zeros to pair together,
-#     that's fine, too (even a single zero can pair with itself):
+        >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 2]))
+        [1, 2]
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1, 0]) )
-#         [[-2, 2], [-1, 1], [0, 0]]
+    However, now we only want unique items, so for these lists, don't show
+    more than 1 or 2 once:
 
-#     """
+        >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
+        [1, 2]
 
-#     return []
+    """
+
+    # Convert each list into a set so we can do set math
+    set1 = set(list1)
+    set2 = set(list2)
+
+    unique_common_set = set1 & set2
+    unique_common_list = list(unique_common_set)
+
+    return unique_common_list
+
+# list1= [1, 2, 3, 4]
+# list2 = [1, 1, 2, 2]
+
+# print find_unique_common_items(list2, list1)
+
+def get_sum_zero_pairs(input_list):
+    """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
+
+    Given a list of numbers, add up each individual pair of numbers.
+    Return a list of each pair of numbers that adds up to 0.
+
+
+    For example:
+
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1]) )
+        [[-2, 2], [-1, 1]]
+
+        >>> sort_pairs( get_sum_zero_pairs([3, -3, 2, 1, -2, -1]) )
+        [[-3, 3], [-2, 2], [-1, 1]]
+
+    This should always be a unique list, even if there are
+    duplicates in the input list:
+
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1]) )
+        [[-2, 2], [-1, 1]]
+
+    Of course, if there are one or more zeros to pair together,
+    that's fine, too (even a single zero can pair with itself):
+
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1, 0]) )
+        [[-2, 2], [-1, 1], [0, 0]]
+
+    """
+
+    return []
 
 
 # def remove_duplicates(words):
