@@ -76,6 +76,8 @@ def find_common_items(list1, list2):
     """
     common = []
 
+    # This loop checks each item in one list against each item in the other.
+    # If a match is found, the item is appended to our list.
     for item1 in list1:
         for item2 in list2:
             if item2 == item1:
@@ -105,20 +107,16 @@ def find_unique_common_items(list1, list2):
         [1, 2]
 
     """
-
     # Convert each list into a set so we can do set math
     set1 = set(list1)
     set2 = set(list2)
 
+    # Find the intersection of the two sets and convert it to a list
     unique_common_set = set1 & set2
     unique_common_list = list(unique_common_set)
 
     return unique_common_list
 
-# list1 = [1, 2, 3, 4]
-# list2 = [1, 1, 2, 2]
-
-# print find_unique_common_items(list2, list1)
 
 def get_sum_zero_pairs(input_list):
     """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
@@ -148,7 +146,8 @@ def get_sum_zero_pairs(input_list):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
-    # Create an empty set to add pairs to.
+    # Create an empty set so we automatically get rid of duplicates as
+    # we add pairs.
     sum_zero_set = set()
 
     # Sort the input list so equivalent pairs look the same when we
@@ -165,7 +164,7 @@ def get_sum_zero_pairs(input_list):
                 sum_zero_set.add(pair)
 
     # Since we want to return a list of lists, we convert the tuples
-    # we created in the loop to lists
+    # to lists and add these lists to the list we return.
     unique_pairs = []
 
     for pair in sum_zero_set:
@@ -192,7 +191,8 @@ def remove_duplicates(words):
         ['Rose', 'a', 'is', 'rose']
 
     """
-
+    # Add each word in the input list as keys to a dictionary to
+    # automatically get rid of duplicates.
     word_dict = {}
 
     for word in words:
@@ -200,23 +200,36 @@ def remove_duplicates(words):
 
     return word_dict.keys()
 
-print sorted(remove_duplicates(["Rose", "is", "a", "rose", "is", "a", "rose"]))
 
+def encode(phrase):
+    """Given a phrase, return the encoded string.
 
+    Replace all "e" characters with "p",
+    replace "a" characters with "d", replace "t" characters with "o",
+    and "i" characters with "u".
 
-# def encode(phrase):
-#     """Given a phrase, return the encoded string.
+    For example:
 
-#     Replace all "e" characters with "p",
-#     replace "a" characters with "d", replace "t" characters with "o",
-#     and "i" characters with "u".
+        >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
+        'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
+    """
+    encoded = ""
 
-#     For example:
+    for char in phrase:
+        if char == "e":
+            encoded += "p"
+        elif char == "a":
+            encoded += "d"
+        elif char == "t":
+            encoded += "o"
+        elif char == "i":
+            encoded += "u"
+        else:
+            encoded += char
 
-#         >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
-#         'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
-#     """
-#     return ''
+    return encoded
+
+print encode("You are a beautiful, talented, brilliant, powerful musk ox.")
 
 
 # def sort_by_word_length(words):
