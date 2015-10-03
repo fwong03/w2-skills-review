@@ -225,25 +225,50 @@ def encode(phrase):
 
     return encoded
 
-print encode("You are a beautiful, talented, brilliant, powerful musk ox.")
 
+def sort_by_word_length(words):
+    """Given list of words, return list of ascending [(len, [words])].
 
-# def sort_by_word_length(words):
-#     """Given list of words, return list of ascending [(len, [words])].
+    Given a list of words, return a list of tuples, ordered by word-length.
+    Each tuple should have two items--the length of the words for that
+    word-length, and the list of words of that word length.
 
-#     Given a list of words, return a list of tuples, ordered by word-length.
-#     Each tuple should have two items--the length of the words for that
-#     word-length, and the list of words of that word length.
+    For example:
 
-#     For example:
+        >>> sort_by_word_length(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
-#         >>> sort_by_word_length(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
+    """
+    # Create an empty dictionary to add length: [list of words] value
+    # pairs
+    words_by_length = {}
 
-#     """
+    # Loop over the list, creating a new entry if the length key is not
+    # already in the dictionary or, if the key already exists, appending
+    # the word to the corresponding list.
+    for word in words:
+        key = len(word)
 
-#     return []
+        if key not in words_by_length:
+            words_by_length[key] = [word]
+        else:
+            words_by_length[key].append(word)
 
+    # Create the list we'll ultimately return.
+    final_list = []
+
+    # To add to the final_list in ascending order, create a list of
+    # sorted keys. We then create and add tuple-ized dictionary entries
+    # in order of this list.
+    word_keys = words_by_length.keys()
+
+    for word in word_keys:
+        pair = (word, words_by_length[word])
+        final_list.append(pair)
+
+    return final_list
+
+print sort_by_word_length(["ok", "an", "apple", "a", "day"])
 
 # def get_pirate_talk(phrase):
 #     """Translate phrase to pirate talk.
