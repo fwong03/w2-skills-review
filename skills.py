@@ -38,8 +38,8 @@ def count_unique(input_string):
     # and strip out punctionation before checking if the word is in our
     # dictionary.
     for word in words:
-        word = word.lower()
-        word = word.strip("?.,:;!'\"_()-__")
+        # word = word.lower()
+        # word = word.strip("?.,:;!'\"_()-__")
         unique[word] = unique.get(word, 0) + 1
 
     return unique
@@ -268,124 +268,152 @@ def sort_by_word_length(words):
 
     return final_list
 
-print sort_by_word_length(["ok", "an", "apple", "a", "day"])
 
-# def get_pirate_talk(phrase):
-#     """Translate phrase to pirate talk.
+def get_pirate_talk(phrase):
+    """Translate phrase to pirate talk.
 
-#     Given a phrase, translate each word to the Pirate-speak equivalent.
-#     Words that cannot be translated into Pirate-speak should pass through
-#     unchanged. Return the resulting sentence.
+    Given a phrase, translate each word to the Pirate-speak equivalent.
+    Words that cannot be translated into Pirate-speak should pass through
+    unchanged. Return the resulting sentence.
 
-#     Here's a table of English to Pirate translations:
+    Here's a table of English to Pirate translations:
 
-#     English     Pirate
-#     ----------  ----------------
-#     sir         matey
-#     hotel       fleabag inn
-#     student     swabbie
-#     boy         matey
-#     madam       proud beauty
-#     professor   foul blaggart
-#     restaurant  galley
-#     your        yer
-#     excuse      arr
-#     students    swabbies
-#     are         be
-#     lawyer      foul blaggart
-#     the         th'
-#     restroom    head
-#     my          me
-#     hello       avast
-#     is          be
-#     man         matey
+    English     Pirate
+    ----------  ----------------
+    sir         matey
+    hotel       fleabag inn
+    student     swabbie
+    boy         matey
+    madam       proud beauty
+    professor   foul blaggart
+    restaurant  galley
+    your        yer
+    excuse      arr
+    students    swabbies
+    are         be
+    lawyer      foul blaggart
+    the         th'
+    restroom    head
+    my          me
+    hello       avast
+    is          be
+    man         matey
 
-#     For example:
+    For example:
 
-#         >>> get_pirate_talk("my student is not a man")
-#         'me swabbie be not a matey'
+        >>> get_pirate_talk("my student is not a man")
+        'me swabbie be not a matey'
 
-#     You should treat words with punctuation as if they were different
-#     words:
+    You should treat words with punctuation as if they were different
+    words:
 
-#         >>> get_pirate_talk("my student is not a man!")
-#         'me swabbie be not a man!'
+        >>> get_pirate_talk("my student is not a man!")
+        'me swabbie be not a man!'
 
-#     """
+    """
+    english_to_pirate = { 'sir': 'matey',
+                        'hotel': 'fleabag inn',
+                        'student': 'swabbie',
+                        'boy': 'matey',
+                        'madam': 'proud beauty',
+                        'professor': 'foul blaggart',
+                        'restaurant': 'galley',
+                        'your': 'yer',
+                        'excuse': 'arr',
+                        'students': 'swabbies',
+                        'are': 'be',
+                        'lawyer': 'foul blaggart',
+                        'the': 'th\'',
+                        'restroom': 'head',
+                        'my': 'me',
+                        'hello': 'avast',
+                        'is': 'be',
+                        'man': 'matey',
+                        }
+    
+    words = phrase.split()
 
-#     return ""
+    pirated_words = []
 
-# # End of skills. See below for advanced problems.
-# # To work on them, set ADVANCED=True at the top of this file.
-# ############################################################################
+    for word in words:
+        word = word.lower()
+        pirated_words.append(english_to_pirate.get(word, word))
 
+    translated = " ".join(pirated_words)
 
-# def adv_get_top_letter(input_string):
-#     """Given an input string, return a list of letter(s) which appear(s) the most the input string.
+    return translated
 
-#     If there is a tie, the order of the letters in the returned
-#     list should be alphabetical.
-
-#     For example:
-#         >>> adv_get_top_letter("The rain in spain stays mainly in the plain.")
-#         ['i', 'n']
-
-#     If there is not a tie, simply return a list with one item.
-
-#     For example:
-#         >>> adv_get_top_letter("Shake it off, shake it off. Shake it off, Shake it off.")
-#         ['f']
-
-#     Spaces do not count as letters.
-
-#     """
-
-#     return ''
-
-
-# def adv_alpha_sort_by_word_length(words):
-#     """Given a list of words, return a list of tuples, ordered by word-length.
-
-#     Each tuple should have two items--a number that is a word-length,
-#     and the list of words of that word length. In addition to ordering
-#     the list by word length, order each sub-list of words alphabetically.
-#     Now try doing it with only one call to .sort() or sorted(). What does the
-#     optional "key" argument for .sort() and sorted() do?
-
-#     For example:
-
-#         >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
-
-#     """
-
-#     return []
+# End of skills. See below for advanced problems.
+# To work on them, set ADVANCED=True at the top of this file.
+############################################################################
 
 
-# ##############################################################################
-# # You can ignore everything below this.
+def adv_get_top_letter(input_string):
+    """Given an input string, return a list of letter(s) which appear(s) the most the input string.
 
-# def print_dict(d):
-#     # This method is just used to print dictionaries in key-alphabetical
-#     # order, and is only used for our documentation tests. You can ignore it.
-#     if isinstance(d, dict):
-#         print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
-#     else:
-#         print d
+    If there is a tie, the order of the letters in the returned
+    list should be alphabetical.
+
+    For example:
+        >>> adv_get_top_letter("The rain in spain stays mainly in the plain.")
+        ['i', 'n']
+
+    If there is not a tie, simply return a list with one item.
+
+    For example:
+        >>> adv_get_top_letter("Shake it off, shake it off. Shake it off, Shake it off.")
+        ['f']
+
+    Spaces do not count as letters.
+
+    """
+
+    return ''
 
 
-# def sort_pairs(l):
-#     # Print sorted list of pairs where the pairs are sorted. This is used only
-#     # for documentation tests. You can ignore it.
-#     return sorted(sorted(pair) for pair in l)
+def adv_alpha_sort_by_word_length(words):
+    """Given a list of words, return a list of tuples, ordered by word-length.
 
-# if __name__ == "__main__":
-#     print
-#     import doctest
-#     for k, v in globals().items():
-#         if k[0].isalpha():
-#             if k.startswith('adv_') and not ADVANCED:
-#                 continue
-#             a = doctest.run_docstring_examples(v, globals(), name=k)
-#     print "** END OF TEST OUTPUT"
-#     print
+    Each tuple should have two items--a number that is a word-length,
+    and the list of words of that word length. In addition to ordering
+    the list by word length, order each sub-list of words alphabetically.
+    Now try doing it with only one call to .sort() or sorted(). What does the
+    optional "key" argument for .sort() and sorted() do?
+
+    For example:
+
+        >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
+
+    """
+
+    return []
+
+
+##############################################################################
+# You can ignore everything below this.
+
+def print_dict(d):
+    # This method is just used to print dictionaries in key-alphabetical
+    # order, and is only used for our documentation tests. You can ignore it.
+    if isinstance(d, dict):
+        print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
+    else:
+        print d
+
+
+def sort_pairs(l):
+    # Print sorted list of pairs where the pairs are sorted. This is used only
+    # for documentation tests. You can ignore it.
+    return sorted(sorted(pair) for pair in l)
+
+if __name__ == "__main__":
+    print
+    import doctest
+    for k, v in globals().items():
+        if k[0].isalpha():
+            if k.startswith('adv_') and not ADVANCED:
+                continue
+            a = doctest.run_docstring_examples(v, globals(), name=k)
+    print "** END OF TEST OUTPUT"
+    print
