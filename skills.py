@@ -166,34 +166,42 @@ def get_sum_zero_pairs(input_list):
 
     # Since we want to return a list of lists, we convert the tuples
     # we created in the loop to lists
-
     unique_pairs = []
+
     for pair in sum_zero_set:
         unique_pairs.append(list(pair))
 
     return unique_pairs
 
 
-# def remove_duplicates(words):
-#     """Given a list of words, return the list with duplicates removed.
+def remove_duplicates(words):
+    """Given a list of words, return the list with duplicates removed.
 
-#     Do this without using a Python set.
+    Do this without using a Python set.
 
-#     For example:
+    For example:
 
-#         >>> sorted(remove_duplicates(
-#         ...     ["rose", "is", "a", "rose", "is", "a", "rose"]))
-#         ['a', 'is', 'rose']
+        >>> sorted(remove_duplicates(
+        ...     ["rose", "is", "a", "rose", "is", "a", "rose"]))
+        ['a', 'is', 'rose']
 
-#     You should treat differently-capitalized words as different:
+    You should treat differently-capitalized words as different:
 
-#         >>> sorted(remove_duplicates(
-#         ...     ["Rose", "is", "a", "rose", "is", "a", "rose"]))
-#         ['Rose', 'a', 'is', 'rose']
+        >>> sorted(remove_duplicates(
+        ...     ["Rose", "is", "a", "rose", "is", "a", "rose"]))
+        ['Rose', 'a', 'is', 'rose']
 
-#     """
+    """
 
-#     return []
+    word_dict = {}
+
+    for word in words:
+        word_dict[word] = word_dict.get(word, 0)
+
+    return word_dict.keys()
+
+print sorted(remove_duplicates(["Rose", "is", "a", "rose", "is", "a", "rose"]))
+
 
 
 # def encode(phrase):
