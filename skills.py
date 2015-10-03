@@ -215,17 +215,13 @@ def encode(phrase):
     """
     encoded = ""
 
+    encode_pairs = { 'e': 'p',
+                    'a': 'd',
+                    't': 'o',
+                    'i': 'u'}
+
     for char in phrase:
-        if char == "e":
-            encoded += "p"
-        elif char == "a":
-            encoded += "d"
-        elif char == "t":
-            encoded += "o"
-        elif char == "i":
-            encoded += "u"
-        else:
-            encoded += char
+        encoded += encode_pairs.get(char, char)
 
     return encoded
 
