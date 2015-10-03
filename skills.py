@@ -154,6 +154,9 @@ def get_sum_zero_pairs(input_list):
     # add them to our set.
     input_list.sort()
 
+    if 0 in input_list:
+        sum_zero_set.add((0,0))
+
     # Loop iterate over the sorted input list, adding each number one
     # at a time to numbers following it. If the sum of the pair is zero,
     # we put the pair in a tuple and add the tuple to our set.
