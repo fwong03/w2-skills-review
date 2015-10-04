@@ -408,7 +408,11 @@ def adv_get_top_letter(input_string):
         else:
             num_words[key].append(char)
 
-    print num_words
+    sorted_keys = sorted(num_words)
+
+    largest_count = sorted_keys[-1]
+
+    return num_words[largest_count]
 
 
 
