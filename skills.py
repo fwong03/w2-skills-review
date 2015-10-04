@@ -28,17 +28,16 @@ def count_unique(input_string):
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
 
     """
-    # Create a dictionary to hold unique word:count pairs.
     # Split input string into a list we can iterate over.
     words = input_string.split()
+
+    # Create a dictionary to hold unique word:count pairs.
     unique = {}
 
     # Iterate over the list and increase the corresponding word count
     # in the dictionary by one. If the word is not already in the 
     # dictionary, we create a new entry with a count of one.
     for word in words:
-        # word = word.lower()
-        # word = word.strip("?.,:;!'\"_()-__")
         unique[word] = unique.get(word, 0) + 1
 
     return unique
@@ -82,7 +81,8 @@ def find_common_items(list1, list2):
             if num2 == num1:
                 common_count[num1] = common_count.get(num1, 0) + 1
     
-    # We put each key in a list and repeat it for how many times it
+    # Because we want to return a list, here we create a list and repeat 
+    # each number that is a key in the dictionary for the max number of times
     # it appears in at least one of the lists.
     common_list = []
     for num in common_count:
@@ -90,17 +90,6 @@ def find_common_items(list1, list2):
             common_list.append(num)
 
     return common_list
-
-    # common = []
-
-    # # This loop checks each item in one list against each item in the other.
-    # # If a match is found, the item is appended to our list.
-    # for item1 in list1:
-    #     for item2 in list2:
-    #         if item2 == item1:
-    #             common.append(item2)
-
-    # return common
 
 
 def find_unique_common_items(list1, list2):
@@ -124,15 +113,14 @@ def find_unique_common_items(list1, list2):
         [1, 2]
 
     """
-    # Convert each list into a set so we can do set math
+    # Convert each list into a set so we can do set math.
     set1 = set(list1)
     set2 = set(list2)
 
-    # Find the intersection of the two sets and convert it to a list
+    # Find the intersection of the two sets and return it as a list.
     unique_common_set = set1 & set2
-    unique_common_list = list(unique_common_set)
 
-    return unique_common_list
+    return list(unique_common_set)
 
 
 def get_sum_zero_pairs(input_list):
@@ -163,14 +151,15 @@ def get_sum_zero_pairs(input_list):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
-    # Create an empty set so we automatically get rid of duplicates as
-    # we add pairs.
-    sum_zero_set = set()
-
     # Sort the input list so equivalent pairs look the same when we
     # add them to our set.
     input_list.sort()
 
+    # An empty set to add sum-to-zero pairs.
+    sum_zero_set = set()
+
+    # Special case: if there is even just one zero is in the list, we add it 
+    # as a sum-to-zero pair.
     if 0 in input_list:
         sum_zero_set.add((0,0))
 
@@ -184,7 +173,7 @@ def get_sum_zero_pairs(input_list):
                 sum_zero_set.add(pair)
 
     # Since we want to return a list of lists, we convert the tuples
-    # to lists and add these lists to the list we return.
+    # to lists and add them to the list we return.
     unique_pairs = []
 
     for pair in sum_zero_set:
@@ -233,8 +222,10 @@ def encode(phrase):
         >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
         'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
     """
+    # An empty string we'll be adding our encoded characters to.
     encoded = ""
 
+    # A dictionary our loop will use to look up which character replacements.
     encode_pairs = { 'e': 'p',
                     'a': 'd',
                     't': 'o',
@@ -259,29 +250,27 @@ def sort_by_word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
     """
-    # Create an empty dictionary to add length: [list of words] value
-    # pairs
+    # Create an empty dictionary to add length: [list of words] pairs.
     words_by_length = {}
 
-    # Loop over the list, creating a new entry if the length key is not
-    # already in the dictionary or, if the key already exists, appending
+    # Loop over the list, creating a new entry if the length is not
+    # already a key in the dictionary or, if the key already exists, appending
     # the word to the corresponding list.
     for word in words:
         key = len(word)
-
         if key not in words_by_length:
             words_by_length[key] = [word]
         else:
             words_by_length[key].append(word)
 
-    # Create the list we'll ultimately return.
+    # We want to return a list so here we create an empty one we'll be adding to.
     final_list = []
 
-    # To add to the final_list in ascending order, create a list of
-    # sorted keys. We then create and add tuple-ized dictionary entries
-    # in order of this list.
+    # Create a list of sorted dictionary keys so we can add them to the list in
+    # ascending order.
     word_keys = words_by_length.keys()
 
+    # Tuple-ize the dictionary entries and add them to the list.
     for word in word_keys:
         pair = (word, words_by_length[word])
         final_list.append(pair)
@@ -331,6 +320,7 @@ def get_pirate_talk(phrase):
         'me swabbie be not a man!'
 
     """
+    # Dictionary of words to replace.
     english_to_pirate = { 'sir': 'matey',
                         'hotel': 'fleabag inn',
                         'student': 'swabbie',
@@ -351,14 +341,18 @@ def get_pirate_talk(phrase):
                         'man': 'matey',
                         }
     
+    # Split the phrase into a list of words we can iterate over.
     words = phrase.split()
 
+    # A list to add pirate-translated words to as we loop over the words in
+    # the original phrase.
     pirated_words = []
 
     for word in words:
         word = word.lower()
         pirated_words.append(english_to_pirate.get(word, word))
 
+    # Convert the list of pirate-translated words into a string.
     translated = " ".join(pirated_words)
 
     return translated
@@ -391,13 +385,18 @@ def adv_get_top_letter(input_string):
     words = input_string.split()
     long_ass_string = "".join(words)
 
-    # Create a dictionary to keep track of how many times a character
-    # appears in the string.
+    # First, we want to count how many times each character appears in the string.
+    # This is the empty dictionary we'll use to keep track.
     words_app = {}
 
+    # Loop over the string and add each character that appears as a key. The
+    # number of times the character appears is its corresponding value.
     for char in long_ass_string:
         words_app[char] = words_app.get(char, 0) + 1
 
+    # Now we know how many times each character appears, we can then organize
+    # the dictionary to have number of repeats as keys, and a list of characters
+    # that repeat that number of times as values.
     unique_chars = words_app.keys()
     num_words = {}
 
@@ -408,50 +407,59 @@ def adv_get_top_letter(input_string):
         else:
             num_words[key].append(char)
 
+    # We want to return the list of most repeated characters, so we sort the
+    # keys and return the value of the last one.
     sorted_keys = sorted(num_words)
-
     largest_count = sorted_keys[-1]
 
     return num_words[largest_count]
 
 
+def adv_alpha_sort_by_word_length(words):
+    """Given a list of words, return a list of tuples, ordered by word-length.
 
-    # # Create the list we'll ultimately return.
-    # final_list = []
+    Each tuple should have two items--a number that is a word-length,
+    and the list of words of that word length. In addition to ordering
+    the list by word length, order each sub-list of words alphabetically.
+    Now try doing it with only one call to .sort() or sorted(). What does the
+    optional "key" argument for .sort() and sorted() do?
 
-    # # To add to the final_list in ascending order, create a list of
-    # # sorted keys. We then create and add tuple-ized dictionary entries
-    # # in order of this list.
-    # word_keys = words_by_length.keys()
+    For example:
 
-    # for word in word_keys:
-    #     pair = (word, words_by_length[word])
-    #     final_list.append(pair)
-
-
-    return ''
-
-adv_get_top_letter("The rain in spain stays mainly in the plain.")
+        >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
 
-# def adv_alpha_sort_by_word_length(words):
-#     """Given a list of words, return a list of tuples, ordered by word-length.
+    """
 
-#     Each tuple should have two items--a number that is a word-length,
-#     and the list of words of that word length. In addition to ordering
-#     the list by word length, order each sub-list of words alphabetically.
-#     Now try doing it with only one call to .sort() or sorted(). What does the
-#     optional "key" argument for .sort() and sorted() do?
+    # Create an empty dictionary to add length: [list of words] pairs.
+    words_by_length = {}
 
-#     For example:
+    # Loop over the list, creating a new entry if the length is not
+    # already a key in the dictionary or, if the key already exists, appending
+    # the word to the corresponding list.
+    for word in words:
+        key = len(word)
+        if key not in words_by_length:
+            words_by_length[key] = [word]
+        else:
+            words_by_length[key].append(word)
 
-#         >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
+    # We want to return a list so here we create an empty one we'll be adding to.
+    final_list = []
 
-#     """
+    # Create a list of sorted dictionary keys so we can add them to the list in
+    # ascending order.
+    word_keys = words_by_length.keys()
 
-#     return []
+    # Sort each value list alphabetically, tupelize the dictionary entry, and
+    # add them to the list.
+    for word in word_keys:
+        value = sorted(words_by_length[word])
+        pair = (word, value)
+        final_list.append(pair)
 
+    return final_list
 
 # ##############################################################################
 # You can ignore everything below this.
