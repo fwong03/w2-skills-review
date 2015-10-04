@@ -28,24 +28,20 @@ def count_unique(input_string):
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
 
     """
-    # Create a dictionary to hold unique word:count pairs and and
-    # split our input string into a list we can iterate over.
+    # Create a dictionary to hold unique word:count pairs.
+    # Split input string into a list we can iterate over.
     words = input_string.split()
     unique = {}
 
-    # Iterate over our list and to prevent duplicates added due to
-    # capitalization or punctuation, we convert the word to all lowercase
-    # and strip out punctionation before checking if the word is in our
-    # dictionary.
+    # Iterate over the list and increase the corresponding word count
+    # in the dictionary by one. If the word is not already in the 
+    # dictionary, we create a new entry with a count of one.
     for word in words:
         # word = word.lower()
         # word = word.strip("?.,:;!'\"_()-__")
         unique[word] = unique.get(word, 0) + 1
 
     return unique
-
-# string = "Hello there, how are you? Hello hello, you you you you"
-# print count_unique(string)
 
 
 def find_common_items(list1, list2):
@@ -74,16 +70,37 @@ def find_common_items(list1, list2):
         [1, 1, 2, 2]
 
     """
-    common = []
+    # Create dictionary to hold number:# repeats pairs
+    common_count = {}
 
-    # This loop checks each item in one list against each item in the other.
-    # If a match is found, the item is appended to our list.
-    for item1 in list1:
-        for item2 in list2:
-            if item2 == item1:
-                common.append(item2)
+    # Iterate over one list and check against every number in the 
+    # other list. If the numbers match, the corresponding value for that
+    # number in the dictionary is increased by one. If the number isn't
+    # already in the dictionary, an entry is created.
+    for num1 in list1:
+        for num2 in list2:
+            if num2 == num1:
+                common_count[num1] = common_count.get(num1, 0) + 1
+    
+    # We put each key in a list and repeat it for how many times it
+    # it appears in at least one of the lists.
+    common_list = []
+    for num in common_count:
+        for i in range(common_count[num]):
+            common_list.append(num)
 
-    return common
+    return common_list
+
+    # common = []
+
+    # # This loop checks each item in one list against each item in the other.
+    # # If a match is found, the item is appended to our list.
+    # for item1 in list1:
+    #     for item2 in list2:
+    #         if item2 == item1:
+    #             common.append(item2)
+
+    # return common
 
 
 def find_unique_common_items(list1, list2):
@@ -433,29 +450,29 @@ adv_get_top_letter("The rain in spain stays mainly in the plain.")
 
 
 # ##############################################################################
-# # You can ignore everything below this.
+# You can ignore everything below this.
 
-# def print_dict(d):
-#     # This method is just used to print dictionaries in key-alphabetical
-#     # order, and is only used for our documentation tests. You can ignore it.
-#     if isinstance(d, dict):
-#         print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
-#     else:
-#         print d
+def print_dict(d):
+    # This method is just used to print dictionaries in key-alphabetical
+    # order, and is only used for our documentation tests. You can ignore it.
+    if isinstance(d, dict):
+        print "{" + ", ".join("%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
+    else:
+        print d
 
 
-# def sort_pairs(l):
-#     # Print sorted list of pairs where the pairs are sorted. This is used only
-#     # for documentation tests. You can ignore it.
-#     return sorted(sorted(pair) for pair in l)
+def sort_pairs(l):
+    # Print sorted list of pairs where the pairs are sorted. This is used only
+    # for documentation tests. You can ignore it.
+    return sorted(sorted(pair) for pair in l)
 
-# if __name__ == "__main__":
-#     print
-#     import doctest
-#     for k, v in globals().items():
-#         if k[0].isalpha():
-#             if k.startswith('adv_') and not ADVANCED:
-#                 continue
-#             a = doctest.run_docstring_examples(v, globals(), name=k)
-#     print "** END OF TEST OUTPUT"
-#     print
+if __name__ == "__main__":
+    print
+    import doctest
+    for k, v in globals().items():
+        if k[0].isalpha():
+            if k.startswith('adv_') and not ADVANCED:
+                continue
+            a = doctest.run_docstring_examples(v, globals(), name=k)
+    print "** END OF TEST OUTPUT"
+    print
